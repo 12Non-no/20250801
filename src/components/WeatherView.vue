@@ -21,7 +21,7 @@
                             item-value="value"
                             item-text="text"
                             :items="targetArea"
-                            v-model="selectTA"
+                            v-model="targetNumber"
                             variant="outlined"
                             style="max-width: 225px;"
                             return-object
@@ -29,7 +29,9 @@
                         </v-select>
                     </div>
                     <div class="mb-2 mt-3" align="center" justify="center">
-                        <v-btn text to="/weather" tag="router-link" elevation="2" class="white">
+                        <v-btn  elevation="2" class="white"
+                        @click="goToWeather"
+                        >
                         ここをクリック！
                         </v-btn>
                     </div>
@@ -42,12 +44,12 @@
 <script>
   export default {
     computed: {
-        selectTA: {
+        targetNumber: {
             get() {
-            return this.$store.getters['product/selectTA'];
+            return this.$store.getters['product/targetNumber'];
             },
             set(value) {
-                this.$store.dispatch('product/setSelectTA', value);
+                this.$store.dispatch('product/setTargetNumber', value);
             }
         },
         areaInfo() {
@@ -73,6 +75,19 @@
    changeArea: function(selectArea) {
      // 1つ目のセレクトボックスで選択された情報をもとに詳細なエリアコードを取得
         this.$store.commit('product/getTargetArea', selectArea);
+   },
+   goToWeather: function() { // 天気詳細画面への遷移および検索履歴をAPIでDBへ保存
+    this.$store.dispatch('product/saveLog' , { // APIでDBへ保存
+        RegionArea: this.selectArea.text,
+        RegionNumber: this.selectArea.value,
+        TargetArea: this.targetNumber.text,
+        TargetNumber: this.targetNumber.value
+    });
+    
+    this.$router.push({ // 画面遷移
+        name: 'weather',
+        params: {targetNumber: this.targetNumber.value}
+    });
    }
   }
 }

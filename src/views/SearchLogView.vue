@@ -51,7 +51,6 @@
     methods: {
       deleteItem: function(item){
         this.$store.dispatch('product/deleteLog', item);
-        this.$router.push('/searchLog');
       },
     }
   };

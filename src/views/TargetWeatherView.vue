@@ -18,10 +18,7 @@
     computed: {
     weatherData() {
       return this.$store.getters['product/weatherData'];
-    },
-    // targetNumber() {
-    //   return this.$store.params.targetNumber;
-    // }
+    }
     },
     mounted() {
       const targetNumber = this.$route.params.targetNumber;

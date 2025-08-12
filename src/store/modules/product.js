@@ -16,20 +16,24 @@ export default {
     headers: [ //検索履歴一覧のヘッダー
       {
         text: '検索エリア',
-        value: 'RegionArea'
+        value: 'RegionArea',
+        width: "40%"
       },
       {
         text: '詳細エリア',
-        value: 'TargetArea'
+        value: 'TargetArea',
+        width: "40%"
       },
       {
         text: '天気情報',
         value: 'weatherButton',
+        width: "10%",
         sortable:false
       },
       {
         text: '削除',
         value: 'delete',
+        width: "10%",
         sortable:false
       }
     ]
